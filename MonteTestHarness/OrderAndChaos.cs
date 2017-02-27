@@ -5,7 +5,7 @@ public class OrderAndChaos : GameMaster {
 	OCState gameState;
     private int numbMovesPlayed = 0;
 
-    public OrderAndChaos(MCTSMaster ai1) : base(ai1)
+    public OrderAndChaos(MCTSMaster ai1, MCTSMaster ai2) : base(ai1, ai2)
     {
         gameState = new OCState();
     }
@@ -13,19 +13,19 @@ public class OrderAndChaos : GameMaster {
 	// Update is called once per frame
 	public override int play () {
 	    //If the game is running and it is time for the AI to play
-	    if (!ai.started)
+
+	    if (!currentAI.started)
 	    {
 	        numbMovesPlayed++;
-	        Console.WriteLine("Kicking off AI. Move: " + numbMovesPlayed);
 	        AIState currentState = new OCAIState(gameState, currentPlayersTurn, null, 0);
-	        ai.run(currentState);
+	        currentAI.run(currentState);
 	    }
-	    else if (ai.done)
+	    else if (currentAI.done)
 	    {
-	        Console.WriteLine("");
-	        OCAIState nextAIState = (OCAIState)ai.next;
+	        OCAIState nextAIState = (OCAIState)currentAI.next;
 	        gameState = nextAIState.state;
-	        ai.reset();
+	        currentAI.reset();
+	        currentAI = ais[currentPlayersTurn];
 	        currentPlayersTurn = (currentPlayersTurn + 1) % 2;
 	    }
 	    gameState.checkGameEnd();

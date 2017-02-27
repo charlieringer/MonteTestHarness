@@ -6,7 +6,7 @@ public class Go : GameMaster {
     GOState gameState;
     private int numbMovesPlayed = 0;
 
-    public Go(MCTSMaster ai1) : base(ai1)
+    public Go(MCTSMaster ai1, MCTSMaster ai2) : base(ai1, ai2)
     {
         gameState = new GOState();
     }
@@ -14,20 +14,18 @@ public class Go : GameMaster {
 	// Play is called once per tick
 	public override int play () {
 		//If the game is running and it is time for the AI to play
-	    if (!ai.started)
+	    if (!currentAI.started)
 	    {
 	        numbMovesPlayed++;
-	        Console.WriteLine("Kicking off AI. Move: " + numbMovesPlayed);
 	        AIState currentState = new GOAIState(gameState, currentPlayersTurn, null, 0);
-	        ai.run(currentState);
+	        currentAI.run(currentState);
 	    }
-	    else if (ai.done)
+	    else if (currentAI.done)
 	    {
-	        Console.WriteLine("White Score: " + gameState.whiteCaptureScore + " Black Score: " + gameState.blackCaptureScore);
-	        Console.WriteLine("");
-	        GOAIState nextAIState = (GOAIState)ai.next;
+	        GOAIState nextAIState = (GOAIState)currentAI.next;
 	        gameState = nextAIState.state;
-	        ai.reset();
+	        currentAI.reset();
+	        currentAI = ais[currentPlayersTurn];
 	        currentPlayersTurn = (currentPlayersTurn + 1) % 2;
 	    }
 	    if (numbMovesPlayed == 100) reset();
