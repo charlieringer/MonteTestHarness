@@ -8,26 +8,32 @@ namespace MonteTestHarness
     {
         public static void Main(string[] args)
         {
-            //trainSimulation();
-            runSimulation();
+            trainSimulation();
+            //runSimulation();
         }
 
         public static void trainSimulation()
         {
-            DLModel model = new DLModel(37);
+            DLModel model = new DLModel(10);
 
-            model.train(1000, 10000, () => { return new GOAIState(new GOState(), 0, null, 0); });
+            model.train(100, 1000, () => { return new TTTAIState(new TTTState(), 0, null, 0); });
             Console.Write("Done");
         }
 
         public static void runSimulation()
         {
-            BasicMCTS aiBasic = new BasicMCTS (0.5, 1.4, 36);
-            DLModel model = new DLModel("TestGoModel.model");
+            BasicMCTS aiBasic = new BasicMCTS (0.25, 1.4, 10);
+            DLModel model = new DLModel("TTTTest.model");
             RandomAgent aiRandom = new RandomAgent();
-            MCTSWithLearning aiLearnt = new MCTSWithLearning(2, 1.4, 36, model);
-            GameMaster game = new Go(aiBasic, aiBasic);
+            //FitnessBasedAI aiFitness = new FitnessBasedAI(model);
+            MCTSWithLearning aiLearnt = new MCTSWithLearning(0.25, 1.4, 10, model);
+            GameMaster game = new TicTacToe(aiBasic, aiLearnt);
             game.runGameSimulations(10);
+            game = new TicTacToe(aiLearnt, aiBasic);
+            game.runGameSimulations(10);
+
+          //  game = new TicTacToe(aiRandom, aiRandom);
+          //  game.runGameSimulations(10);
 
 
            // game.runGameSimulations(10);

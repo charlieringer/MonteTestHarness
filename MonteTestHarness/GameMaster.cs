@@ -20,7 +20,7 @@ abstract public class GameMaster {
     public void runGameSimulations(int numbGames)
     {
         int gamesPlayed = 0;
-        int[] wins = new int[2];
+        int[] wins = new int[3];
         while (gamesPlayed < numbGames)
         {
             int result = play();
