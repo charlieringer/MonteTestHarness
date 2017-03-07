@@ -2,12 +2,12 @@
 using Monte;
 
 public class TicTacToe : GameMaster{
-    TTTState gameState;
     private int numbMovesPlayed = 0;
+    private AIState latestAIState;
 
-    public TicTacToe(MCTSMaster ai1, MCTSMaster ai2) : base(ai1, ai2)
+    public TicTacToe()
     {
-        gameState = new TTTState();
+        latestAIState = new TTTAIState();
     }
 
     // Play is called once per tick
@@ -15,34 +15,36 @@ public class TicTacToe : GameMaster{
         //If the game is running and it is time for the AI to play
         if (!currentAI.started)
         {
-            numbMovesPlayed++;
-            AIState currentState = new TTTAIState(gameState, currentPlayersTurn, null, 0);
+            AIState currentState = new TTTAIState(latestAIState.stateRep, currentPlayersTurn, null, 0);
             currentAI.run(currentState);
         }
         else if (currentAI.done)
         {
             TTTAIState nextAIState = (TTTAIState)currentAI.next;
-            if (nextAIState == null)
-            {
-                reset();
-            }
+            nextAIState.flipBoard();
+            if (nextAIState == null)  reset();
             else
             {
-                gameState = nextAIState.state;
+                latestAIState = nextAIState;
                 currentAI.reset();
-                currentAI = ais[currentPlayersTurn];
                 currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+                currentAI = ais[currentPlayersTurn];
             }
+            numbMovesPlayed++;
+            //Console.WriteLine(numbMovesPlayed);
         }
-        if (numbMovesPlayed == 10) reset();
-        gameState.checkGameEnd();
+        if (numbMovesPlayed == 9)
+        {
+            reset();
+        }
 
-        return gameState.winner;
+        return latestAIState.getWinner();
     }
 
     public override void reset()
     {
-        gameState = new TTTState();
+        latestAIState = new TTTAIState();
         numbMovesPlayed = 0;
+        currentPlayersTurn = 0;
     }
 }

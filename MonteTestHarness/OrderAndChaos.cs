@@ -5,7 +5,7 @@ public class OrderAndChaos : GameMaster {
 	OCState gameState;
     private int numbMovesPlayed = 0;
 
-    public OrderAndChaos(MCTSMaster ai1, MCTSMaster ai2) : base(ai1, ai2)
+    public OrderAndChaos()
     {
         gameState = new OCState();
     }

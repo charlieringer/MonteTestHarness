@@ -6,7 +6,7 @@ public class Go : GameMaster {
     GOState gameState;
     private int numbMovesPlayed = 0;
 
-    public Go(MCTSMaster ai1, MCTSMaster ai2) : base(ai1, ai2)
+    public Go()
     {
         gameState = new GOState();
     }
