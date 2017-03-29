@@ -4,8 +4,8 @@ using System;
 
 abstract public class GameMaster {
 	//Stores all the variables needed for the Game that are shared between the two.
-	protected MCTSMaster currentAI;
-    protected MCTSMaster[] ais;
+	protected AIAgent currentAI;
+    protected AIAgent[] ais;
 	protected bool gamePlaying;
 	protected int currentPlayersTurn;
 
@@ -16,9 +16,9 @@ abstract public class GameMaster {
 
     }
 
-    public void runGameSimulations(int numbGames, MCTSMaster _ai1, MCTSMaster _ai2)
+    public void runGameSimulations(int numbGames, AIAgent _ai1, AIAgent _ai2)
     {
-        ais = new MCTSMaster[2];
+        ais = new AIAgent[2];
         ais[0] = _ai1;
         ais[1] = _ai2;
         currentAI = ais[currentPlayersTurn];
@@ -31,12 +31,9 @@ abstract public class GameMaster {
             if (result >= 0)
             {
                 reset();
-                //if (result != 2)
-                //{
-                    Console.WriteLine("Game completed. Player " + result + " won.");
-                    gamesPlayed++;
-                    wins[result]++;
-                //}
+                 //Console.WriteLine("Game completed. Player " + result + " won.");
+                 gamesPlayed++;
+                 wins[result]++;
 
             }
         }

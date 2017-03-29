@@ -15,26 +15,39 @@ namespace MonteTestHarness
 
         public static void trainSimulation()
         {
-            DLModel model = new DLModel();
+            Learner model = new Learner();
 
-            model.train(1000, 10000, () => { return new TTTAIState(); });
+            model.train(100, 1000, () => new TTTAIState());
             Console.Write("Done");
         }
 
         public static void runSimulation()
         {
-            BasicMCTS aiBasic = new BasicMCTS (0.25, 1.4, 10);
-            DLModel model = new DLModel("TTTTest.model");
+            MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (0.5, 1.4, 10);
+            Learner model = new Learner("TTTTest_Best.model");
             RandomAgent aiRandom = new RandomAgent();
-            FitnessBasedAI aiFitness = new FitnessBasedAI(model);
-            MCTSWithLearning aiLearnt = new MCTSWithLearning(0.25, 1.4, 10, model);
+            ModelBased modelBasedAI = new ModelBased(model);
+            ModelBased modelBasedAI1 = new ModelBased(new Learner("TTTTest_New.model"));
+            MCTSWithLearning aiLearnt = new MCTSWithLearning(0.5, 1.4, 10, model);
+            MCTSWithPruning aiPruning = new MCTSWithPruning(0.25, 1.4, 10, model, 0.2);
+            //MCTSWithPruning aiPruning2 = new MCTSWithPruning(0.25, 1.4, 10, new Learner("TTTTest_Rand.model"), 0.2);
             GameMaster game = new TicTacToe();
             game = new TicTacToe();
-            //game.runGameSimulations(10, aiRandom, aiLearnt);
-            //game.runGameSimulations(10, aiLearnt, aiRandom);
-            game.runGameSimulations(30, aiLearnt, aiBasic);
-            game.runGameSimulations(30, aiBasic, aiLearnt);
-            //game.runGameSimulations(2000, aiRandom, aiRandom);
+            Console.WriteLine("Random vs Model 1");
+            game.runGameSimulations(50000, aiRandom, modelBasedAI);
+            game.runGameSimulations(50000, modelBasedAI, aiRandom);
+            Console.WriteLine("Random vs Model 2");
+            game.runGameSimulations(50000, aiRandom, modelBasedAI1);
+            game.runGameSimulations(50000, modelBasedAI1, aiRandom);
+
+            //game.runGameSimulations(50, aiPruning, aiMctsSimpleAgent);
+            //game.runGameSimulations(50, aiMctsSimpleAgent, aiPruning);
+            Console.WriteLine("Model 1 vs Model 2");
+            game.runGameSimulations(50000, modelBasedAI, modelBasedAI1);
+            game.runGameSimulations(50000, modelBasedAI1, modelBasedAI);
+
+            //game.runGameSimulations(50, aiPruning, aiPruning2);
+            //game.runGameSimulations(50, aiPruning2, aiPruning);
         }
     }
 }

@@ -10,15 +10,7 @@ public class TTTAIState : AIState
         parent = null;
         depth = 0;
     }
-    public TTTAIState(int[] _stateRep, int pIndex, AIState _parent, int _depth) : base(pIndex, _parent, _depth)
-    {
-        stateRep = new int[_stateRep.Length];
-        for (int i = 0; i < _stateRep.Length; i++)
-        {
-            if (_stateRep[i] == 1) stateRep[i] = -1;
-            else if (_stateRep[i] == -1) stateRep[i] = 1;
-        }
-    }
+    public TTTAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep) : base(pIndex, _parent, _depth, _stateRep){}
 
     public override List<AIState> generateChildren()
     {
@@ -28,8 +20,8 @@ public class TTTAIState : AIState
         for (int i = 0; i < stateRep.Length; i++) {
             if (stateRep[i] == 0) {
                 int[] newBoard = (int[])stateRep.Clone ();
-                newBoard [i] = 1;
-                TTTAIState childAIState = new TTTAIState (newBoard, newPIndx, this, depth + 1);
+                newBoard [i] = newPIndx+1;
+                TTTAIState childAIState = new TTTAIState (newPIndx, this, depth + 1, newBoard);
                 children.Add (childAIState);
             }
         }
@@ -58,13 +50,13 @@ public class TTTAIState : AIState
         return -1;
     }
 
-    public void flipBoard()
-    {
-        for (int i = 0; i < stateRep.Length; i++)
-        {
-            if (stateRep[i] == 1) stateRep[i] = -1;
-            else if (stateRep[i] == -1) stateRep[i] = 1;
-        }
-
-    }
+//    public void flipBoard()
+//    {
+//        for (int i = 0; i < stateRep.Length; i++)
+//        {
+//            if (stateRep[i] == 1) stateRep[i] = -1;
+//            else if (stateRep[i] == -1) stateRep[i] = 1;
+//        }
+//
+//    }
 }

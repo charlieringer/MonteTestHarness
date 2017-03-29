@@ -15,14 +15,14 @@ public class TicTacToe : GameMaster{
         //If the game is running and it is time for the AI to play
         if (!currentAI.started)
         {
-            AIState currentState = new TTTAIState(latestAIState.stateRep, currentPlayersTurn, null, 0);
+            AIState currentState = new TTTAIState(currentPlayersTurn, null, 0, latestAIState.stateRep);
             currentAI.run(currentState);
         }
         else if (currentAI.done)
         {
             TTTAIState nextAIState = (TTTAIState)currentAI.next;
-            nextAIState.flipBoard();
-            if (nextAIState == null)  reset();
+           // nextAIState.flipBoard();
+            if (nextAIState == null)reset();
             else
             {
                 latestAIState = nextAIState;
