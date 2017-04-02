@@ -30,10 +30,18 @@ abstract public class GameMaster {
             int result = play();
             if (result >= 0)
             {
+                gamesPlayed++;
+                if (result > 1)
+                {
+                    //Console.WriteLine("Game completed. It was a draw");
+
+                    continue;
+                }
+
                 reset();
-                 //Console.WriteLine("Game completed. Player " + result + " won.");
-                 gamesPlayed++;
-                 wins[result]++;
+                //Console.WriteLine("Game completed. Player " + result + " won.");
+               // gamesPlayed++;
+                wins[result]++;
 
             }
         }

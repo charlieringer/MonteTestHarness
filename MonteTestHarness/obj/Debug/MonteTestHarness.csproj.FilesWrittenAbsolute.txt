@@ -5,3 +5,6 @@
 /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/obj/Debug/MonteTestHarness.exe
 /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/obj/Debug/MonteTestHarness.exe.mdb
 /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/Monte.dll.mdb
+/Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/MonteTestHarness.pdb
+/Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/obj/Debug/MonteTestHarness.pdb
+/Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/Monte.pdb

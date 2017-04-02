@@ -9,45 +9,63 @@ namespace MonteTestHarness
         public static void Main(string[] args)
         {
 
-           trainSimulation();
-           //runSimulation();
+           //trainSimulation();
+           runSimulation();
+           Console.Write("Done");
         }
 
         public static void trainSimulation()
         {
-            Learner model = new Learner();
+            Model model = new Model();
 
             model.train(100, 1000, () => new TTTAIState());
-            Console.Write("Done");
         }
 
         public static void runSimulation()
         {
-            MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (0.5, 1.4, 10);
-            Learner model = new Learner("TTTTest_Best.model");
+            MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (0.25, 1.4, 10);
             RandomAgent aiRandom = new RandomAgent();
-            ModelBased modelBasedAI = new ModelBased(model);
-            ModelBased modelBasedAI1 = new ModelBased(new Learner("TTTTest_New.model"));
-            MCTSWithLearning aiLearnt = new MCTSWithLearning(0.5, 1.4, 10, model);
-            MCTSWithPruning aiPruning = new MCTSWithPruning(0.25, 1.4, 10, model, 0.2);
-            //MCTSWithPruning aiPruning2 = new MCTSWithPruning(0.25, 1.4, 10, new Learner("TTTTest_Rand.model"), 0.2);
+
+            Model modelA = new Model("TTTTest_1Layer.model");
+            Model modelB = new Model("TTTTest_3Layers.model");
+
+
+            ModelBased modelBasedAI1 = new ModelBased(modelA);
+            ModelBased modelBasedAI2 = new ModelBased(modelB);
+
+            MCTSWithLearning aiLearnt1 = new MCTSWithLearning(0.25, 1.4, 10, modelA);
+            MCTSWithLearning aiLearnt2 = new MCTSWithLearning(0.25, 1.4, 10, modelB);
+
+            MCTSWithPruning aiPruning1 = new MCTSWithPruning(0.25, 1.4, 10, modelA, 0.2);
+            MCTSWithPruning aiPruning2 = new MCTSWithPruning(0.25, 1.4, 10, modelB, 0.2);
+
             GameMaster game = new TicTacToe();
             game = new TicTacToe();
-            Console.WriteLine("Random vs Model 1");
-            game.runGameSimulations(50000, aiRandom, modelBasedAI);
-            game.runGameSimulations(50000, modelBasedAI, aiRandom);
-            Console.WriteLine("Random vs Model 2");
-            game.runGameSimulations(50000, aiRandom, modelBasedAI1);
-            game.runGameSimulations(50000, modelBasedAI1, aiRandom);
 
-            //game.runGameSimulations(50, aiPruning, aiMctsSimpleAgent);
-            //game.runGameSimulations(50, aiMctsSimpleAgent, aiPruning);
-            Console.WriteLine("Model 1 vs Model 2");
-            game.runGameSimulations(50000, modelBasedAI, modelBasedAI1);
-            game.runGameSimulations(50000, modelBasedAI1, modelBasedAI);
+//            Console.WriteLine("Random vs Model 1");
+//            game.runGameSimulations(5000, aiRandom, modelBasedAI1);
+//            game.runGameSimulations(5000, modelBasedAI1, aiRandom);
+//
+//            Console.WriteLine("Random vs Model 2");
+//            game.runGameSimulations(5000, aiRandom, modelBasedAI2);
+//            game.runGameSimulations(5000, modelBasedAI2, aiRandom);
+//
+//
+//            Console.WriteLine("Model 1 vs Model 2");
+//            game.runGameSimulations(5000, modelBasedAI1, modelBasedAI2);
+//            game.runGameSimulations(5000, modelBasedAI2, modelBasedAI1);
+//
+//            Console.WriteLine("Pruning 1 vs Basic");
+//            game.runGameSimulations(100, aiPruning1, aiMctsSimpleAgent);
+//            game.runGameSimulations(100, aiMctsSimpleAgent, aiPruning1);
+//
+//            Console.WriteLine("Pruning 2 vs Basic");
+//            game.runGameSimulations(100, aiPruning2, aiMctsSimpleAgent);
+//            game.runGameSimulations(100, aiMctsSimpleAgent, aiPruning2);
 
-            //game.runGameSimulations(50, aiPruning, aiPruning2);
-            //game.runGameSimulations(50, aiPruning2, aiPruning);
+            Console.WriteLine("Pruning 1 vs Pruning 2");
+            game.runGameSimulations(100, aiPruning1, aiPruning2);
+            game.runGameSimulations(100, aiPruning2, aiPruning1);
         }
     }
 }

@@ -21,7 +21,6 @@ public class TicTacToe : GameMaster{
         else if (currentAI.done)
         {
             TTTAIState nextAIState = (TTTAIState)currentAI.next;
-           // nextAIState.flipBoard();
             if (nextAIState == null)reset();
             else
             {
@@ -36,6 +35,7 @@ public class TicTacToe : GameMaster{
         if (numbMovesPlayed == 9)
         {
             reset();
+            return 2;
         }
 
         return latestAIState.getWinner();

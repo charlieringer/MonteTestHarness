@@ -5,24 +5,28 @@ public class TTTAIState : AIState
 {
     public TTTAIState()
     {
-        stateRep = new int[9];
+        stateRep = new int[10];
+        stateRep[9] = 2;
         playerIndex = 0;
         parent = null;
         depth = 0;
     }
-    public TTTAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep) : base(pIndex, _parent, _depth, _stateRep){}
+
+    public TTTAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep) : base(pIndex, _parent, _depth,
+        _stateRep){}
 
     public override List<AIState> generateChildren()
     {
         List<AIState> children = new List<AIState> ();
         int newPIndx = (playerIndex == 0) ? 1 : 0;
 
-        for (int i = 0; i < stateRep.Length; i++) {
-            if (stateRep[i] == 0) {
-                int[] newBoard = (int[])stateRep.Clone ();
-                newBoard [i] = newPIndx+1;
-                TTTAIState childAIState = new TTTAIState (newPIndx, this, depth + 1, newBoard);
-                children.Add (childAIState);
+        for (int i = 0; i < 9; i++) {
+        if (stateRep[i] == 0) {
+            int[] newBoard = (int[])stateRep.Clone ();
+            newBoard [i] = playerIndex+1;
+                //newBoard [i] = 1;
+            TTTAIState childAIState = new TTTAIState (newPIndx, this, depth + 1, newBoard);
+            children.Add (childAIState);
             }
         }
         this.children = children;
@@ -49,14 +53,4 @@ public class TTTAIState : AIState
             return (playerIndex+1)%2;
         return -1;
     }
-
-//    public void flipBoard()
-//    {
-//        for (int i = 0; i < stateRep.Length; i++)
-//        {
-//            if (stateRep[i] == 1) stateRep[i] = -1;
-//            else if (stateRep[i] == -1) stateRep[i] = 1;
-//        }
-//
-//    }
 }
