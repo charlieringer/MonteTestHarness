@@ -1,13 +1,13 @@
 ﻿using System;
 using Monte;
 
-public class OrderAndChaos : GameMaster {
-	OCState gameState;
-    private int numbMovesPlayed = 0;
+public class OrderAndChaos : GameMaster
+{
+    private int[] lastMovePlayed;
 
     public OrderAndChaos()
     {
-        gameState = new OCState();
+        latestAIState = new OCAIState();
     }
 
 	// Update is called once per frame
@@ -17,24 +17,30 @@ public class OrderAndChaos : GameMaster {
 	    if (!currentAI.started)
 	    {
 	        numbMovesPlayed++;
-	        AIState currentState = new OCAIState(gameState, currentPlayersTurn, null, 0);
+	        AIState currentState = new OCAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
 	        currentAI.run(currentState);
 	    }
 	    else if (currentAI.done)
 	    {
 	        OCAIState nextAIState = (OCAIState)currentAI.next;
-	        gameState = nextAIState.state;
-	        currentAI.reset();
-	        currentAI = ais[currentPlayersTurn];
-	        currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+	        if (nextAIState == null) reset();
+	        else
+	        {
+	            latestAIState = nextAIState;
+	            currentAI.reset();
+	            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+	            currentAI = ais[currentPlayersTurn];
+	            lastMovePlayed = nextAIState.lastPiecePlayed;
+	            numbMovesPlayed++;
+	        }
 	    }
-	    gameState.checkGameEnd();
-	    return gameState.winner;
+	    return latestAIState.getWinner();
 	}
 
     public override void reset()
     {
-        gameState = new OCState();
+        latestAIState = new OCAIState();
         numbMovesPlayed = 0;
+        currentPlayersTurn = 0;
     }
 }

@@ -8,6 +8,8 @@ abstract public class GameMaster {
     protected AIAgent[] ais;
 	protected bool gamePlaying;
 	protected int currentPlayersTurn;
+    protected int numbMovesPlayed = 0;
+    protected AIState latestAIState = null;
 
     protected GameMaster()
     {
