@@ -1,7 +1,7 @@
 ﻿using System;
 using Monte;
 
-public class Hex : GameMaster
+public class Hex : Game
 {
     public Hex()
     {

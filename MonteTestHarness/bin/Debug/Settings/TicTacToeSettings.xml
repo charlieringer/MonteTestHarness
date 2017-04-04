@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 	<MCTSSettings 
-		ThinkingTime="0.5" 
+		ThinkingTime="0.25" 
 		ExploreWeight="1.45" 
-		MaxRollout="36" 
-		DrawScore="0.5">
+		MaxRollout="9" 
+		DrawScore="0">
 	</MCTSSettings>
 
 	<PruningSettings 
@@ -17,6 +17,6 @@
 		NumbHiddenLayers="3" 
 		Normalisation="0.05" 
 		ConfidenceThreshold="0.8"
-		DrawValue="0.5">
+		DrawScore="0.5">
 	</DeepLearningSettings>
 </Settings>

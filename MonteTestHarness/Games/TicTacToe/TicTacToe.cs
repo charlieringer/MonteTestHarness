@@ -1,7 +1,7 @@
 ﻿using System;
 using Monte;
 
-public class TicTacToe : GameMaster{
+public class TicTacToe : Game{
 
     public TicTacToe()
     {

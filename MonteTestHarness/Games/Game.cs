@@ -2,7 +2,7 @@
 using Monte;
 using System;
 
-abstract public class GameMaster {
+abstract public class Game {
 	//Stores all the variables needed for the Game that are shared between the two.
 	protected AIAgent currentAI;
     protected AIAgent[] ais;
@@ -11,7 +11,7 @@ abstract public class GameMaster {
     protected int numbMovesPlayed = 0;
     protected AIState latestAIState = null;
 
-    protected GameMaster()
+    protected Game()
     {
         gamePlaying = true;
         currentPlayersTurn = 0;

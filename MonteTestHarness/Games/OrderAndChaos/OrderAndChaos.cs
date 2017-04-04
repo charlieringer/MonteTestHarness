@@ -1,7 +1,7 @@
 ﻿using System;
 using Monte;
 
-public class OrderAndChaos : GameMaster
+public class OrderAndChaos : Game
 {
     private int[] lastMovePlayed;
 
