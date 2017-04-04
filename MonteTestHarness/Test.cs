@@ -97,6 +97,10 @@ public class Test
         game.runGameSimulations(500, aiRandom, modelBased);
         game.runGameSimulations(500, modelBased, aiRandom);
 
+        Console.WriteLine("Random vs Basic");
+        game.runGameSimulations(20, aiRandom, aiMctsSimpleAgent);
+        game.runGameSimulations(20, aiMctsSimpleAgent, aiRandom);
+
         Console.WriteLine("Learnt vs Basic");
         game.runGameSimulations(20, aiLearnt, aiMctsSimpleAgent);
         game.runGameSimulations(20, aiMctsSimpleAgent, aiLearnt);
