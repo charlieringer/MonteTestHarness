@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 	<MCTSSettings 
-		ThinkingTime="0.5" 
+		ThinkingTime="0.25" 
 		ExploreWeight="1.45" 
-		MaxRollout="64" 
-		DrawScore="0.5">
+		MaxRollout="9" 
+		DrawScore="0">
 	</MCTSSettings>
 
 	<PruningSettings 

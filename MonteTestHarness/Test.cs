@@ -7,17 +7,17 @@ public class Test
     {
         //runTicTacToeDevTest();
         //runOrderAndChaosDevTest();
-        runTrials(new TicTacToe(), new Model("TicTacToe_Example.model"));
-        //runTrials(new OrderAndChaos(), new Model("OrderAndChaos_Example.model"));
+        runTrials(new TicTacToe(), new Model("TicTacToe_Example.model"), "TicTacToeSettings.xml");
+        //runTrials(new OrderAndChaos(), new Model("OrderAndChaos_Example.model"), "OrderAndChaosSettings.xml");
     }
-    public static void runTrials(GameMaster game, Model model)
+    public static void runTrials(GameMaster game, Model model, string settings)
     {
         Console.WriteLine("Running Trials.");
         RandomAgent random = new RandomAgent();
         ModelBasedAgent modelBased = new ModelBasedAgent(model);
-        MCTSSimpleAgent simple = new MCTSSimpleAgent ();
-        MCTSWithLearning learnt = new MCTSWithLearning(model);
-        MCTSWithPruning pruned = new MCTSWithPruning(model);
+        MCTSSimpleAgent simple = new MCTSSimpleAgent (settings);
+        MCTSWithLearning learnt = new MCTSWithLearning(model, settings);
+        MCTSWithPruning pruned = new MCTSWithPruning(model, settings);
 
         Console.WriteLine("Random vs Model Based");
         game.runGameSimulations(500, random, modelBased);
