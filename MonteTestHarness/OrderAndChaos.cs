@@ -16,7 +16,6 @@ public class OrderAndChaos : GameMaster
 
 	    if (!currentAI.started)
 	    {
-	        numbMovesPlayed++;
 	        AIState currentState = new OCAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
 	        currentAI.run(currentState);
 	    }

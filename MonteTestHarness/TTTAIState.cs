@@ -24,7 +24,6 @@ public class TTTAIState : AIState
         if (stateRep[i] == 0) {
             int[] newBoard = (int[])stateRep.Clone ();
             newBoard [i] = playerIndex+1;
-                //newBoard [i] = 1;
             TTTAIState childAIState = new TTTAIState (newPIndx, this, depth + 1, newBoard);
             children.Add (childAIState);
             }

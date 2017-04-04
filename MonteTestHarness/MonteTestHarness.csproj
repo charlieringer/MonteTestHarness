@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameMaster.cs" />
-    <Compile Include="Go.cs" />
-    <Compile Include="GoStates.cs" />
+    <Compile Include="Hex.cs" />
+    <Compile Include="HexAIState.cs" />
     <Compile Include="OCAIstate.cs" />
     <Compile Include="OrderAndChaos.cs" />
     <Compile Include="TestHarness.cs" />

@@ -2,8 +2,6 @@
 using Monte;
 
 public class TicTacToe : GameMaster{
-    private int numbMovesPlayed = 0;
-    private AIState latestAIState;
 
     public TicTacToe()
     {

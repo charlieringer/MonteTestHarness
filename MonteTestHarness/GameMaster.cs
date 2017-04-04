@@ -33,18 +33,12 @@ abstract public class GameMaster {
             if (result >= 0)
             {
                 gamesPlayed++;
-                if (result > 1)
+                if (result < 2)
                 {
-                    //Console.WriteLine("Game completed. It was a draw");
+                    reset();
+                    wins[result]++;
 
-                    continue;
                 }
-
-                reset();
-                //Console.WriteLine("Game completed. Player " + result + " won.");
-               // gamesPlayed++;
-                wins[result]++;
-
             }
         }
         Console.WriteLine("Player 0 wins: " + wins[0] + " Player 1 wins: " + wins[1]);

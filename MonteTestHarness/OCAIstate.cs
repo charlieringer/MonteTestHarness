@@ -4,8 +4,8 @@ using Monte;
 
 public class OCAIState : AIState
 {
-    public int[] lastPiecePlayed = null;
-    public int numbPiecesPlayed = 0;
+    public int[] lastPiecePlayed;
+    public int numbPiecesPlayed;
 
     public OCAIState()
     {
@@ -14,6 +14,7 @@ public class OCAIState : AIState
         playerIndex = 0;
         parent = null;
         depth = 0;
+        numbPiecesPlayed = 0;
     }
 
     public OCAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep, int[] _lastPiecePlayed,
