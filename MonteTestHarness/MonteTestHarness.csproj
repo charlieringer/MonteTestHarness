@@ -46,9 +46,11 @@
     <Compile Include="HexAIState.cs" />
     <Compile Include="OCAIstate.cs" />
     <Compile Include="OrderAndChaos.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="TestHarness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicTacToe.cs" />
+    <Compile Include="Train.cs" />
     <Compile Include="TTTAIState.cs" />
   </ItemGroup>
   <ItemGroup>
