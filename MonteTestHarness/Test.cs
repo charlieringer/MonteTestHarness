@@ -7,8 +7,8 @@ public class Test
     {
         Console.WriteLine("Starting Testing");
         //Quick dev tests
-        //runTicTacToeDevTest();
-        runOrderAndChaosDevTest();
+        runTicTacToeDevTest();
+        //runOrderAndChaosDevTest();
 
         //Full Trials
         //runTrials(new TicTacToe(), new Model("TicTacToe_Example.model"), "Settings/TicTacToeSettings.xml");
@@ -63,46 +63,52 @@ public class Test
     public static void runTicTacToeDevTest()
     {
         Console.WriteLine("Running Tic Tac Toe Dev Tests.");
-        Model model = new Model("TTTTest_3Layers.model");
+        Model model = new Model("ModelExamples/TicTacToe_Example.model");
 
         RandomAgent aiRandom = new RandomAgent();
-        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (0.25, 1.4, 9, 0.5);
+        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (500, 1.4, 9, 0.5);
         ModelBasedAgent modelBased = new ModelBasedAgent(model);
-        MCTSWithPruning aiPruning = new MCTSWithPruning(0.25, 1.4, 9, model, 0.2, 0.5);
-        MCTSWithLearning aiLearnt = new MCTSWithLearning(0.25, 1.4, 9, model, 0.5);
+        MCTSWithPruning aiPruning = new MCTSWithPruning(500, 1.4, 9, model, 0.33, 0.5);
+        MCTSWithLearning aiLearnt = new MCTSWithLearning(500, 1.4, 9, model, 0.5);
 
         Game game = new TicTacToe();
+//
+//        Console.WriteLine("Random vs Random");
+//        game.runGameSimulations(500, aiRandom, aiRandom);
+//        Console.WriteLine("");
+//
+//        Console.WriteLine("Random vs Model");
+//        game.runGameSimulations(500, aiRandom, modelBased);
+//        game.runGameSimulations(500, modelBased, aiRandom);
+//        Console.WriteLine("");
+//
 
-        Console.WriteLine("Random vs Random");
-        game.runGameSimulations(500, aiRandom, aiRandom);
-        Console.WriteLine("");
-
-        Console.WriteLine("Random vs Model");
-        game.runGameSimulations(500, aiRandom, modelBased);
-        game.runGameSimulations(500, modelBased, aiRandom);
-        Console.WriteLine("");
+//        Console.WriteLine("Basic vs Basic");
+//        game.runGameSimulations(500, aiMctsSimpleAgent, aiMctsSimpleAgent);
+//        game.runGameSimulations(500, aiMctsSimpleAgent, aiMctsSimpleAgent);
+//        Console.WriteLine("");
 
         Console.WriteLine("Learnt vs Basic");
-        game.runGameSimulations(20, aiLearnt, aiMctsSimpleAgent);
-        game.runGameSimulations(20, aiMctsSimpleAgent, aiLearnt);
+        game.runGameSimulations(500, aiLearnt, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiLearnt);
         Console.WriteLine("");
 
         Console.WriteLine("Pruning vs Basic");
-        game.runGameSimulations(20, aiPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(20, aiMctsSimpleAgent, aiPruning);
+        game.runGameSimulations(500, aiPruning, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning);
         Console.WriteLine("");
     }
 
     public static void runOrderAndChaosDevTest()
     {
         Console.WriteLine("Running Order and Chaos Dev Tests.");
-        Model model = new Model("OCTest_3Layers.model");
+        Model model = new Model("ModelExamples/OrderChaos_Example.model");
 
         RandomAgent aiRandom = new RandomAgent();
-        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (5, 1.4, 36, 0.5);
+        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (1000, 1.4, 36, 0.5);
         ModelBasedAgent modelBased = new ModelBasedAgent(model);
-        MCTSWithPruning aiPruning = new MCTSWithPruning(5, 1.4, 36, model, 0.2, 0.5);
-        MCTSWithLearning aiLearnt = new MCTSWithLearning(5, 1.4, 36, model, 0.5);
+        MCTSWithPruning aiPruning = new MCTSWithPruning(1000, 1.4, 36, model, 0.33, 0.5);
+        MCTSWithLearning aiLearnt = new MCTSWithLearning(1000, 1.4, 36, model, 0.5);
 
         Game game = new OrderAndChaos();
 
@@ -110,29 +116,34 @@ public class Test
 //        game.runGameSimulations(500, aiRandom, aiRandom);
 //        Console.WriteLine("");
 //
-        Console.WriteLine("Random vs Model");
-        game.runGameSimulations(500, aiRandom, modelBased);
-        game.runGameSimulations(500, modelBased, aiRandom);
-        Console.WriteLine("");
-//
+//        Console.WriteLine("Random vs Model");
+//        game.runGameSimulations(500, aiRandom, modelBased);
+//        game.runGameSimulations(500, modelBased, aiRandom);
+//        Console.WriteLine("");
+
 //        Console.WriteLine("Random vs Basic");
-//        game.runGameSimulations(20, aiRandom, aiMctsSimpleAgent);
-//        game.runGameSimulations(20, aiMctsSimpleAgent, aiRandom);
+//        game.runGameSimulations(10, aiRandom, aiMctsSimpleAgent);
+//        game.runGameSimulations(10, aiMctsSimpleAgent, aiRandom);
 //        Console.WriteLine("");
 //
 //        Console.WriteLine("Learnt vs Basic");
 //        game.runGameSimulations(20, aiLearnt, aiMctsSimpleAgent);
 //        game.runGameSimulations(20, aiMctsSimpleAgent, aiLearnt);
 //        Console.WriteLine("");
-//
-//        Console.WriteLine("Pruning vs Basic");
-//        game.runGameSimulations(20, aiPruning, aiMctsSimpleAgent);
-//        game.runGameSimulations(20, aiMctsSimpleAgent, aiPruning);
-//        Console.WriteLine("");
 
-        Console.WriteLine("Random vs Pruning");
-        game.runGameSimulations(20, aiRandom, aiPruning);
-        game.runGameSimulations(20, aiPruning, aiRandom);
+        Console.WriteLine("Basic vs Basic");
+        game.runGameSimulations(100, aiMctsSimpleAgent, aiMctsSimpleAgent);
+        game.runGameSimulations(100, aiMctsSimpleAgent, aiMctsSimpleAgent);
         Console.WriteLine("");
+
+        Console.WriteLine("Pruning vs Basic");
+        game.runGameSimulations(100, aiPruning, aiMctsSimpleAgent);
+        game.runGameSimulations(100, aiMctsSimpleAgent, aiPruning);
+        Console.WriteLine("");
+
+//        Console.WriteLine("Random vs Pruning");
+//        game.runGameSimulations(20, aiRandom, aiPruning);
+//        game.runGameSimulations(20, aiPruning, aiRandom);
+//        Console.WriteLine("");
     }
 }

@@ -32,6 +32,7 @@ abstract public class Game {
             int result = play();
             if (result >= 0)
             {
+                //Console.WriteLine("Game finished.");
                 gamesPlayed++;
                 if (result < 2)
                 {
