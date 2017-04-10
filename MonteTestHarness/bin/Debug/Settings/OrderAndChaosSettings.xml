@@ -12,10 +12,10 @@
 	</PruningSettings>
 	
 	<DeepLearningSettings 
-		Alpha="0.01" 
+		Alpha="0.005" 
 		MaxForwardItters="64" 
 		NumbHiddenLayers="3" 
-		Normalisation="0.05" 
+		Normalisation="0.01" 
 		ConfidenceThreshold="0.8"
 		DrawScore="0.5">
 	</DeepLearningSettings>

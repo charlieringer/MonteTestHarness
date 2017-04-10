@@ -16,7 +16,8 @@ public class OrderAndChaos : Game
 
 	    if (!currentAI.started)
 	    {
-	        AIState currentState = new OCAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
+	        AIState currentState = new OCAIState((currentPlayersTurn+1)%2, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
+	        //AIState currentState = new OCAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
 	        currentAI.run(currentState);
 	    }
 	    else if (currentAI.done)

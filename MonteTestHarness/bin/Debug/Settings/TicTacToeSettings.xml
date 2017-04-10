@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 	<MCTSSettings 
-		NumberOfSimulations="500" 
+		NumberOfSimulations="1000" 
 		ExploreWeight="1.45" 
 		MaxRollout="9" 
 		DrawScore="0">

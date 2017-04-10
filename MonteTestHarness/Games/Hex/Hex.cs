@@ -13,7 +13,7 @@ public class Hex : Game
         //If the game is running and it is time for the AI to play
         if (!currentAI.started)
         {
-            AIState currentState = new HexAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, numbMovesPlayed);
+            AIState currentState = new HexAIState((currentPlayersTurn+1)%2, null, 0, latestAIState.stateRep, numbMovesPlayed);
             currentAI.run(currentState);
         }
         else if (currentAI.done)

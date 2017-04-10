@@ -13,7 +13,8 @@ public class TicTacToe : Game{
         //If the game is running and it is time for the AI to play
         if (!currentAI.started)
         {
-            AIState currentState = new TTTAIState(currentPlayersTurn, null, 0, latestAIState.stateRep);
+            AIState currentState = new TTTAIState((currentPlayersTurn+1)%2, null, 0, latestAIState.stateRep);
+            //AIState currentState = new TTTAIState(currentPlayersTurn, null, 0, latestAIState.stateRep);
             currentAI.run(currentState);
         }
         else if (currentAI.done)
