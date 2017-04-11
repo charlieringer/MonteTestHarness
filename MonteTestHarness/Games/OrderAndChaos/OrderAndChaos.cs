@@ -23,16 +23,13 @@ public class OrderAndChaos : Game
 	    else if (currentAI.done)
 	    {
 	        OCAIState nextAIState = (OCAIState)currentAI.next;
-	        if (nextAIState == null) reset();
-	        else
-	        {
-	            latestAIState = nextAIState;
-	            currentAI.reset();
-	            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
-	            currentAI = ais[currentPlayersTurn];
-	            lastMovePlayed = nextAIState.lastPiecePlayed;
-	            numbMovesPlayed++;
-	        }
+	        if (nextAIState == null) return 2;
+            latestAIState = nextAIState;
+            currentAI.reset();
+            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+            currentAI = ais[currentPlayersTurn];
+            lastMovePlayed = nextAIState.lastPiecePlayed;
+            numbMovesPlayed++;
 	    }
 	    return latestAIState.getWinner();
 	}
@@ -42,5 +39,6 @@ public class OrderAndChaos : Game
         latestAIState = new OCAIState();
         numbMovesPlayed = 0;
         currentPlayersTurn = 0;
+        currentAI = ais[currentPlayersTurn];
     }
 }

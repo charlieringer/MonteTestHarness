@@ -20,23 +20,14 @@ public class TicTacToe : Game{
         else if (currentAI.done)
         {
             TTTAIState nextAIState = (TTTAIState)currentAI.next;
-            if (nextAIState == null)reset();
-            else
-            {
-                latestAIState = nextAIState;
-                currentAI.reset();
-                currentPlayersTurn = (currentPlayersTurn + 1) % 2;
-                currentAI = ais[currentPlayersTurn];
-            }
-            numbMovesPlayed++;
-            //Console.WriteLine(numbMovesPlayed);
-        }
-        if (numbMovesPlayed == 9)
-        {
-            reset();
-            return 2;
-        }
+            if (nextAIState == null) return 2;
+            latestAIState = nextAIState;
+            currentAI.reset();
+            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+            currentAI = ais[currentPlayersTurn];
 
+            numbMovesPlayed++;
+        }
         return latestAIState.getWinner();
     }
 
@@ -45,5 +36,6 @@ public class TicTacToe : Game{
         latestAIState = new TTTAIState();
         numbMovesPlayed = 0;
         currentPlayersTurn = 0;
+        currentAI = ais[currentPlayersTurn];
     }
 }

@@ -7,7 +7,7 @@ public class Test
     {
         Console.WriteLine("Starting Testing");
         //Quick dev tests
-        //runTicTacToeDevTest();
+        runTicTacToeDevTest();
         runOrderAndChaosDevTest();
         //runHexDevTest();
 
@@ -24,6 +24,7 @@ public class Test
         MCTSSimpleAgent simple = new MCTSSimpleAgent (settings);
         MCTSWithLearning learnt = new MCTSWithLearning(model, settings);
         MCTSWithPruning pruned = new MCTSWithPruning(model, settings);
+        MCTSWithSoftPruning softPruned = new MCTSWithSoftPruning(model, settings);
         Console.WriteLine("");
 
         Console.WriteLine("Random vs Model Based");
@@ -46,6 +47,11 @@ public class Test
         game.runGameSimulations(500, pruned, random);
         Console.WriteLine("");
 
+        Console.WriteLine("Random vs Soft Pruned");
+        game.runGameSimulations(500, random, softPruned);
+        game.runGameSimulations(500, softPruned, random);
+        Console.WriteLine("");
+
         Console.WriteLine("Simple vs Learnt");
         game.runGameSimulations(500, simple, learnt);
         game.runGameSimulations(500, learnt, simple);
@@ -54,99 +60,123 @@ public class Test
         Console.WriteLine("Simple vs Pruned");
         game.runGameSimulations(500, simple, pruned);
         game.runGameSimulations(500, pruned, simple);
-
-        Console.WriteLine("Learnt vs Pruned");
-        game.runGameSimulations(500, learnt, pruned);
-        game.runGameSimulations(500, pruned, learnt);
         Console.WriteLine("");
+
+        Console.WriteLine("Simple vs Soft Pruned");
+        game.runGameSimulations(500, simple, softPruned);
+        game.runGameSimulations(500, softPruned, simple);
+        Console.WriteLine("");
+
     }
 
     public static void runTicTacToeDevTest()
     {
+        int itters = 100;
+        double utcConst = 1.4;
+        int maxRollout = 9;
+        double drawScore = 0.5;
+
         Console.WriteLine("Running Tic Tac Toe Dev Tests.");
         Model model = new Model("ModelExamples/TicTacToe_Example.model");
 
         RandomAgent aiRandom = new RandomAgent();
-        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (1000, 1.4, 9, 0.5);
+        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (itters, utcConst, maxRollout, drawScore);
         ModelBasedAgent modelBased = new ModelBasedAgent(model);
-        MCTSWithPruning aiPruning = new MCTSWithPruning(1000, 1.4, 9, model, 0.4, 0.5);
-        MCTSWithSoftPruning aiSoftPruning = new MCTSWithSoftPruning(1000, 1.4, 9, model, 0.1, 0.5);
-        MCTSWithLearning aiLearnt = new MCTSWithLearning(1000, 1.4, 9, model, 0.5);
+
+        MCTSWithPruning aiPruning1 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.225, drawScore);
+        MCTSWithPruning aiPruning2 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.25, drawScore);
+        MCTSWithPruning aiPruning3 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.275, drawScore);
+
+        MCTSWithSoftPruning aiSoftPruning1 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.10, drawScore);
+        MCTSWithSoftPruning aiSoftPruning2 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.15, drawScore);
+        MCTSWithSoftPruning aiSoftPruning3 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.20, drawScore);
+
+        MCTSWithLearning aiLearnt = new MCTSWithLearning(itters, utcConst, maxRollout, model, drawScore);
 
         Game game = new TicTacToe();
-//
-//        Console.WriteLine("Random vs Random");
-//        game.runGameSimulations(500, aiRandom, aiRandom);
-//        Console.WriteLine("");
-//
-//        Console.WriteLine("Random vs Model");
-//        game.runGameSimulations(500, aiRandom, modelBased);
-//        game.runGameSimulations(500, modelBased, aiRandom);
-//        Console.WriteLine("");
-//
 
-//        Console.WriteLine("Basic vs Basic");
-//      game.runGameSimulations(200, aiMctsSimpleAgent, aiMctsSimpleAgent);
-//        game.runGameSimulations(200, aiMctsSimpleAgent, aiMctsSimpleAgent);
-//        Console.WriteLine("");
-
-//        Console.WriteLine("Learnt vs Basic");
-//        game.runGameSimulations(500, aiLearnt, aiMctsSimpleAgent);
-//        game.runGameSimulations(500, aiMctsSimpleAgent, aiLearnt);
-//        Console.WriteLine("");
-
-        Console.WriteLine("Hard Pruning vs Basic");
-        game.runGameSimulations(500, aiPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning);
+        Console.WriteLine("Random vs Model");
+        game.runGameSimulations(500, aiRandom, modelBased);
+        game.runGameSimulations(500, modelBased, aiRandom);
         Console.WriteLine("");
 
-        Console.WriteLine("Soft Pruning vs Basic");
-        game.runGameSimulations(500, aiSoftPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning);
+        Console.WriteLine("Random vs Basic");
+        game.runGameSimulations(500, aiRandom, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiRandom);
+        Console.WriteLine("");
+
+        Console.WriteLine("Learnt vs Basic");
+        Console.WriteLine("Skipped...");
+        //game.runGameSimulations(500, aiLearnt, aiMctsSimpleAgent);
+        //game.runGameSimulations(500, aiMctsSimpleAgent, aiLearnt);
+        Console.WriteLine("");
+
+        Console.WriteLine("Hard Pruning 0.225 vs Basic");
+        game.runGameSimulations(500, aiPruning1, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning1);
+        Console.WriteLine("");
+
+        Console.WriteLine("Hard Pruning 0.25 vs Basic");
+        game.runGameSimulations(500, aiPruning2, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning2);
+        Console.WriteLine("");
+
+        Console.WriteLine("Hard Pruning 0.275 vs Basic");
+        game.runGameSimulations(500, aiPruning3, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning3);
+        Console.WriteLine("");
+
+        Console.WriteLine("Soft Pruning 0.20 vs Basic");
+        game.runGameSimulations(500, aiSoftPruning1, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning1);
+        Console.WriteLine("");
+
+        Console.WriteLine("Soft Pruning 0.25 vs Basic");
+        game.runGameSimulations(500, aiSoftPruning2, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning2);
+        Console.WriteLine("");
+
+        Console.WriteLine("Soft Pruning 0.30 vs Basic");
+        game.runGameSimulations(500, aiSoftPruning3, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning3);
         Console.WriteLine("");
     }
 
     public static void runOrderAndChaosDevTest()
     {
+        int itters = 500;
+        double utcConst = 1.4;
+        int maxRollout = 36;
+        double drawScore = 0.5;
+
         Console.WriteLine("Running Order and Chaos Dev Tests.");
         Model model = new Model("ModelExamples/OrderChaos_Example.model");
 
         RandomAgent aiRandom = new RandomAgent();
-        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (1000, 1.4, 9, 0.5);
+        MCTSSimpleAgent aiMctsSimpleAgent = new MCTSSimpleAgent (itters, utcConst, maxRollout, drawScore);
         ModelBasedAgent modelBased = new ModelBasedAgent(model);
 
-        MCTSWithPruning aiPruning1 = new MCTSWithPruning(1000, 1.4, 9, model, 0.15, 0.5);
-        MCTSWithSoftPruning aiSoftPruning1 = new MCTSWithSoftPruning(1000, 1.4, 9, model, 0.20, 0.5);
+        MCTSWithPruning aiPruning1 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.15, drawScore);
+        MCTSWithPruning aiPruning2 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.20, drawScore);
+        MCTSWithPruning aiPruning3 = new MCTSWithPruning(itters, utcConst, maxRollout, model, 0.25, drawScore);
 
-        MCTSWithPruning aiPruning2 = new MCTSWithPruning(1000, 1.4, 9, model, 0.20, 0.5);
-        MCTSWithSoftPruning aiSoftPruning2 = new MCTSWithSoftPruning(1000, 1.4, 9, model, 0.25, 0.5);
+        MCTSWithSoftPruning aiSoftPruning1 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.20, drawScore);
+        MCTSWithSoftPruning aiSoftPruning2 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.25, drawScore);
+        MCTSWithSoftPruning aiSoftPruning3 = new MCTSWithSoftPruning(itters, utcConst, maxRollout, model, 0.30, drawScore);
 
-        MCTSWithPruning aiPruning3 = new MCTSWithPruning(1000, 1.4, 9, model, 0.25, 0.5);
-        MCTSWithSoftPruning aiSoftPruning3 = new MCTSWithSoftPruning(1000, 1.4, 9, model, 0.30, 0.5);
-
-        MCTSWithLearning aiLearnt = new MCTSWithLearning(1000, 1.4, 9, model, 0.5);
+        MCTSWithLearning aiLearnt = new MCTSWithLearning(itters, utcConst, maxRollout, model, drawScore);
 
         Game game = new OrderAndChaos();
 
-//        Console.WriteLine("Random vs Random");
-//        game.runGameSimulations(500, aiRandom, aiRandom);
-//        Console.WriteLine("");
-//
 //        Console.WriteLine("Random vs Model");
 //        game.runGameSimulations(500, aiRandom, modelBased);
 //        game.runGameSimulations(500, modelBased, aiRandom);
 //        Console.WriteLine("");
 
-//        Console.WriteLine("Random vs Basic");
-//        game.runGameSimulations(10, aiRandom, aiMctsSimpleAgent);
-//        game.runGameSimulations(10, aiMctsSimpleAgent, aiRandom);
-//        Console.WriteLine("");
-//
-//        Console.WriteLine("Learnt vs Basic");
-//        game.runGameSimulations(10, aiLearnt, aiMctsSimpleAgent);
-//        game.runGameSimulations(10, aiMctsSimpleAgent, aiLearnt);
-//        Console.WriteLine("");
-
+        Console.WriteLine("Random vs Basic");
+        game.runGameSimulations(10, aiRandom, aiMctsSimpleAgent);
+        game.runGameSimulations(10, aiMctsSimpleAgent, aiRandom);
+        Console.WriteLine("");
 
         Console.WriteLine("Hard Pruning 0.15 vs Basic");
         game.runGameSimulations(10, aiPruning1, aiMctsSimpleAgent);
@@ -178,10 +208,10 @@ public class Test
         game.runGameSimulations(10, aiMctsSimpleAgent, aiSoftPruning3);
         Console.WriteLine("");
 
-        Console.WriteLine("Learnt vs Basic");
-        game.runGameSimulations(10, aiLearnt, aiMctsSimpleAgent);
-        game.runGameSimulations(10, aiMctsSimpleAgent, aiLearnt);
-        Console.WriteLine("");
+//        Console.WriteLine("Learnt vs Basic");
+//        game.runGameSimulations(20, aiLearnt, aiMctsSimpleAgent);
+//        game.runGameSimulations(20, aiMctsSimpleAgent, aiLearnt);
+//        Console.WriteLine("");
 
 
 //        Console.WriteLine("Random vs Pruning");

@@ -2,7 +2,7 @@
 using Monte;
 using System;
 
-abstract public class Game {
+public abstract class Game {
 	//Stores all the variables needed for the Game that are shared between the two.
 	protected AIAgent currentAI;
     protected AIAgent[] ais;
@@ -15,7 +15,6 @@ abstract public class Game {
     {
         gamePlaying = true;
         currentPlayersTurn = 0;
-
     }
 
     public void runGameSimulations(int numbGames, AIAgent _ai1, AIAgent _ai2)
@@ -32,17 +31,12 @@ abstract public class Game {
             int result = play();
             if (result >= 0)
             {
-                //Console.WriteLine("Game finished.");
                 gamesPlayed++;
-                if (result < 2)
-                {
-                    reset();
-                    wins[result]++;
-
-                }
+                wins[result]++;
+                reset();
             }
         }
-        Console.WriteLine("Player 0 wins: " + wins[0] + " Player 1 wins: " + wins[1]);
+        Console.WriteLine("Player 0 wins: " + wins[0] + "     Player 1 wins: " + wins[1] + "     Draws: " + wins[2]);
     }
 
     public abstract int play();
