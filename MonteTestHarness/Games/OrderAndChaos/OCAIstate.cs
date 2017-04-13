@@ -60,49 +60,55 @@ public class OCAIState : AIState
 		return children;
 	}
 
-	public override int getWinner()
-	{
-	    if (lastPiecePlayed == null) return -1;
-	    if (numbPiecesPlayed == 36) return 1;
-	    int boardWidth = 6;
-	    int location = lastPiecePlayed [0];
-	    int locModBoard = location % boardWidth;
-	    int rowStart =  (int) Math.Floor((double)(location / boardWidth))*boardWidth;
-	    int colourPlayed = lastPiecePlayed [1];
-	    int countX = 0;
-	    int countY = 0;
-	    int countD1 = 0;
-	    int countD2 = 0;
+    public override int getWinner()
+    {
+        if (lastPiecePlayed == null) return -1;
+        if (numbPiecesPlayed == 36) return 1;
+        int boardWidth = 6;
+        int location = lastPiecePlayed[0];
+        int locModBoard = location % boardWidth;
+        int rowStart = (int) Math.Floor((double) (location / boardWidth)) * boardWidth;
+        int colourPlayed = lastPiecePlayed[1];
+        int countX = 0;
+        int countY = 0;
+        int countD1 = 0;
+        int countD2 = 0;
 
-	    for (int i = 0; i < 6; i++) {
-	        //Check orthognal directions
-	        //Vertical
-	        if (stateRep [locModBoard+(boardWidth*i)] == colourPlayed) //If we find a match
-	            countX++; //Increment the count
-	        else if (countX >= 1 && countX < 5) //If we find a break and have not completed the row
-	            countX = 0; //It is impossible to win so set count to 0
+        for (int i = 0; i < 6; i++)
+        {
+            //Check orthognal directions
+            //Vertical
+            if (stateRep[locModBoard + (boardWidth * i)] == colourPlayed) //If we find a match
+                countX++; //Increment the count
+            else if (countX >= 1 && countX < 5) //If we find a break and have not completed the row
+                countX = 0; //It is impossible to win so set count to 0
 
-	        //Horizontal
-	        if (stateRep[rowStart + i] == colourPlayed)  //If we find a match
-	            countY++; //Increment the count
-	        else if (countY >= 1 && countY < 5) //If we find a break and have not completed the row
-	            countY = 0; //It is impossible to win so set count to 0
+            //Horizontal
+            if (stateRep[rowStart + i] == colourPlayed) //If we find a match
+                countY++; //Increment the count
+            else if (countY >= 1 && countY < 5) //If we find a break and have not completed the row
+                countY = 0; //It is impossible to win so set count to 0
 
-	        //Check diagonal directions
-	        int diag1Loc = location % 7 + i + i * boardWidth;
-	        bool hasWraparoundD1 = diag1Loc % boardWidth < locModBoard && location < diag1Loc;
-	        if (diag1Loc == colourPlayed && !hasWraparoundD1) countD1++;
-	        else if (countD1 >= 1 && countD1 < 5) countD1 = 0;
+            //Check diagonal directions
+            int diag1Start = location % 7;
+            int diag1Loc = diag1Start + i * 7;
+            if (diag1Loc < 36 && stateRep[diag1Loc] == colourPlayed &&
+                ((location % 7 == 0) || (location % 7 == 1) | (location % 7 == 6))) countD1++;
+            else if (countD1 >= 1 && countD1 < 5) countD1 = 0;
 
-	        int diag2Loc = location % 5 - i + i * boardWidth;
-	        bool hasWraparoundD2 = diag2Loc % boardWidth > locModBoard && location < diag2Loc;
-	        if (diag2Loc == colourPlayed &&  !hasWraparoundD2) countD2++;
-	        else if (countD2 >= 1 && countD2 < 5) countD2 = 0;
+            int diag2Start = (location % 5 < 4) ? location % 5 + 5 : location % 5;
+            int diag2Loc = diag2Start + i * 5;
+            if (diag2Loc < 36 && stateRep[diag2Loc] == colourPlayed &&
+                ((location % 5 == 0) || (location % 5 == 4) | (location % 5 == 6))) countD2++;
+            else if (countD2 >= 1 && countD2 < 5) countD2 = 0;
 
-	    }
-	    //if either direction is at least 5 the game is over (Order wins)
-	    if (countX >= 5 || countY >= 5 || countD1 >= 5 || countD2 >= 5) return 0;
-	    //Otherwise game is still going on.
-	    return -1;
-	}
+        }
+        //if either direction is at least 5 the game is over (Order wins)
+        if (countX >= 5 || countY >= 5 || countD1 >= 5 || countD2 >= 5)
+        {
+            return 0;
+        }
+        //Otherwise game is still going on.
+        return -1;
+    }
 }
