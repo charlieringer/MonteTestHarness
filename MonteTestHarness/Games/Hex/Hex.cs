@@ -30,14 +30,20 @@ public class Hex : Game
             numbMovesPlayed++;
             //Console.WriteLine(numbMovesPlayed);
         }
+        if (numbMovesPlayed == 81)
+        {
+            //reset();
+            return 2;
+        }
 
         return latestAIState.getWinner();
     }
 
     public override void reset()
     {
-        latestAIState = new TTTAIState();
+        latestAIState = new HexAIState();
         numbMovesPlayed = 0;
         currentPlayersTurn = 0;
+        currentAI = ais[currentPlayersTurn];
     }
 }
