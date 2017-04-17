@@ -3,18 +3,22 @@
 	<MCTSSettings 
 		NumberOfSimulations="1000" 
 		ExploreWeight="1.45" 
-		MaxRollout="9" 
-		DrawScore="0">
+		MaxRollout="81" 
+		DrawScore="0.5">
 	</MCTSSettings>
 
 	<PruningSettings 
 		PruneWorsePercent="0.1"
 		SoftPruneWeight="0.1">	
 	</PruningSettings>
+
+	<RolloutSettins
+		Epsilon="0.4">
+	</RolloutSettins>
 	
 	<DeepLearningSettings 
 		Alpha="0.01" 
-		MaxForwardItters="64" 
+		MaxForwardItters="81" 
 		NumbHiddenLayers="3" 
 		Normalisation="0.05" 
 		ConfidenceThreshold="0.8"

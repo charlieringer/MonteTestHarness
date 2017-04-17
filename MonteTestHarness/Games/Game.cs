@@ -1,9 +1,9 @@
-﻿
-using Monte;
+﻿using Monte;
 using System;
 
+//Base class for al of the games
 public abstract class Game {
-	//Stores all the variables needed for the Game that are shared between the two.
+	//Stores all the variables needed for the Game that are common
 	protected AIAgent currentAI;
     protected AIAgent[] ais;
 	protected bool gamePlaying;

@@ -9,16 +9,16 @@ public class HexAIState : AIState
     
     public HexAIState()
     {
-        stateRep = new int[width*width+1];
-        stateRep[stateRep.Length-1] = 2;
+        stateRep = new int[width*width];
         playerIndex = 0;
         parent = null;
         depth = 0;
+        numbPieceTypes = 2;
     }
 
     public HexAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep,
         int _numbPiecesPlayed) : base(pIndex, _parent, _depth,
-        _stateRep)
+        _stateRep, 2)
     {
         numbPiecesPlayed = _numbPiecesPlayed;
     }

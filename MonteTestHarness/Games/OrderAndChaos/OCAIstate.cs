@@ -9,20 +9,21 @@ public class OCAIState : AIState
 
     public OCAIState()
     {
-        stateRep = new int[37];
-        stateRep[36] = 2;
+        stateRep = new int[36];
         playerIndex = 0;
         parent = null;
         depth = 0;
         numbPiecesPlayed = 0;
+        numbPieceTypes = 2;
     }
 
     public OCAIState(int pIndex, AIState _parent, int _depth, int[] _stateRep, int[] _lastPiecePlayed,
         int _numbPiecesPlayed) : base(pIndex, _parent, _depth,
-        _stateRep)
+        _stateRep, 2)
     {
         lastPiecePlayed = _lastPiecePlayed;
         numbPiecesPlayed = _numbPiecesPlayed;
+        numbPieceTypes = 2;
     }
 
 	public override List<AIState> generateChildren()
