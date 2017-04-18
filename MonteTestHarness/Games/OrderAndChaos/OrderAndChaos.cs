@@ -1,43 +1,55 @@
-﻿using System;
-using Monte;
+﻿using Monte;
 
 public class OrderAndChaos : Game
 {
+    //Tracker for the last move
     private int[] lastMovePlayed;
 
-    public OrderAndChaos()
-    {
-        latestAIState = new OCAIState();
-    }
+    //Make a blank state
+    public OrderAndChaos() { latestAIState = new OCAIState(); }
 
-	// Update is called once per frame
+	// Play is called once per frame
 	public override int play () {
-	    //If the game is running and it is time for the AI to play
-
+	    //If the current AI has not been started
 	    if (!currentAI.started)
 	    {
+	        //Start it
 	        AIState currentState = new OCAIState((currentPlayersTurn+1)%2, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
-	        //AIState currentState = new OCAIState(currentPlayersTurn, null, 0, latestAIState.stateRep, lastMovePlayed, numbMovesPlayed);
 	        currentAI.run(currentState);
 	    }
+	    //Otherwise if it is done
 	    else if (currentAI.done)
 	    {
+	        //get the next state
 	        OCAIState nextAIState = (OCAIState)currentAI.next;
-	        if (nextAIState == null) return 2;
-            latestAIState = nextAIState;
-            currentAI.reset();
-            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
-            currentAI = ais[currentPlayersTurn];
-            lastMovePlayed = nextAIState.lastPiecePlayed;
+	        //If it is null just reset (this is an error)
+	        if (nextAIState == null) reset();
+	        else
+	        {
+	            //Otherwise unpack the state
+	            latestAIState = nextAIState;
+	            //Reset the current AI
+	            currentAI.reset();
+	            //And update which AI is playing
+	            currentPlayersTurn = (currentPlayersTurn + 1) % 2;
+	            currentAI = ais[currentPlayersTurn];
+	            lastMovePlayed = nextAIState.lastPiecePlayed;
+	        }
+	        //Update the number of moves
             numbMovesPlayed++;
 	    }
+	    //Return the winner (or -1 is the game is still going)
 	    return latestAIState.getWinner();
 	}
 
+    //resets the game (ready to be played again)
     public override void reset()
     {
+        //Reset the state
         latestAIState = new OCAIState();
+        //And the number odf moves played
         numbMovesPlayed = 0;
+        //And who is playing
         currentPlayersTurn = 0;
         currentAI = ais[currentPlayersTurn];
     }

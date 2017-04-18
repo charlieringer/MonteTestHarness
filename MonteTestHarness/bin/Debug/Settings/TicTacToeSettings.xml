@@ -8,12 +8,13 @@
 	</MCTSSettings>
 
 	<PruningSettings 
-		PruneWorsePercent="0.35"
+		PruneWorsePercent="0.25"
+		StopAt="6"
 		SoftPruneWeight="0.25">	
 	</PruningSettings>
 
 	<RolloutSettins
-		Epsilon="0.4">
+		Epsilon="0.33">
 	</RolloutSettins>
 	
 	<DeepLearningSettings 

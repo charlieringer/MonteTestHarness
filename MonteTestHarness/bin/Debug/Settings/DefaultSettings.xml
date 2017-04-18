@@ -8,7 +8,9 @@
 	</MCTSSettings>
 
 	<PruningSettings 
-		PruneWorsePercent="0.33">	
+		PruneWorsePercent="0.33"
+		StopAt="10"
+		SoftPruneWeight="0.5">
 	</PruningSettings>
 
 	<RolloutSettins

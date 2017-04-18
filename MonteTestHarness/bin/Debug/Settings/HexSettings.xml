@@ -9,6 +9,7 @@
 
 	<PruningSettings 
 		PruneWorsePercent="0.1"
+		StopAt="10"
 		SoftPruneWeight="0.1">	
 	</PruningSettings>
 
