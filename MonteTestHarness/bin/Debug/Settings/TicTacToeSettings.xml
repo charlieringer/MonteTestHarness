@@ -8,8 +8,8 @@
 	</MCTSSettings>
 
 	<PruningSettings 
-		PruneWorsePercent="0.25"
-		StopAt="6"
+		PruneWorsePercent="0.15"
+		StopAt="7"
 		SoftPruneWeight="0.25">	
 	</PruningSettings>
 

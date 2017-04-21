@@ -10,11 +10,11 @@
 	<PruningSettings 
 		PruneWorsePercent="0.2"
 		StopAt="10"
-		SoftPruneWeight="0.5">	
+		SoftPruneWeight="0.2">	
 	</PruningSettings>
 
 	<RolloutSettins
-		Epsilon="0.4">
+		Epsilon="0.25">
 	</RolloutSettins>
 	
 	<DeepLearningSettings 
