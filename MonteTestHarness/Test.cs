@@ -83,20 +83,20 @@ public class Test
 //        game.runGameSimulations(500, aiMctsSimpleAgent, aiRandom);
 //        Console.WriteLine("");
 //
-//        Console.WriteLine("Learnt vs Basic");
-//        game.runGameSimulations(500, aiLearnt, aiMctsSimpleAgent);
-//        game.runGameSimulations(500, aiMctsSimpleAgent, aiLearnt);
+        Console.WriteLine("Learnt vs Basic");
+        game.runGameSimulations(500, aiLearnt, aiMctsSimpleAgent);
+        game.runGameSimulations(500, aiMctsSimpleAgent, aiLearnt);
+        Console.WriteLine("");
+
+//        Console.WriteLine("Hard Pruning vs Basic");
+//        game.runGameSimulations(500, aiPruning, aiMctsSimpleAgent);
+//        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning);
 //        Console.WriteLine("");
-
-        Console.WriteLine("Hard Pruning vs Basic");
-        game.runGameSimulations(500, aiPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(500, aiMctsSimpleAgent, aiPruning);
-        Console.WriteLine("");
-
-        Console.WriteLine("Soft Pruning 0.25 vs Basic");
-        game.runGameSimulations(500, aiSoftPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning);
-        Console.WriteLine("");
+//
+//        Console.WriteLine("Soft Pruning 0.25 vs Basic");
+//        game.runGameSimulations(500, aiSoftPruning, aiMctsSimpleAgent);
+//        game.runGameSimulations(500, aiMctsSimpleAgent, aiSoftPruning);
+//        Console.WriteLine("");
     }
 
     public static void runOrderAndChaosDevTest()
@@ -115,30 +115,30 @@ public class Test
 
         Game game = new OrderAndChaos();
 
-        Console.WriteLine("Random vs Model");
-        game.runGameSimulations(50, aiRandom, modelBased);
-        game.runGameSimulations(50, modelBased, aiRandom);
-        Console.WriteLine("");
+//        Console.WriteLine("Random vs Model");
+//        game.runGameSimulations(50, aiRandom, modelBased);
+//        game.runGameSimulations(50, modelBased, aiRandom);
+//        Console.WriteLine("");
+//
+//        Console.WriteLine("Random vs Basic");
+//        game.runGameSimulations(50, aiRandom, aiMctsSimpleAgent);
+//        game.runGameSimulations(50, aiMctsSimpleAgent, aiRandom);
+//        Console.WriteLine("");
+//
+//        Console.WriteLine("Learnt vs Basic");
+//        //game.runGameSimulations(50, aiLearnt, aiMctsSimpleAgent);
+//        game.runGameSimulations(50, aiMctsSimpleAgent, aiLearnt);
+//        Console.WriteLine("");
 
-        Console.WriteLine("Random vs Basic");
-        game.runGameSimulations(50, aiRandom, aiMctsSimpleAgent);
-        game.runGameSimulations(50, aiMctsSimpleAgent, aiRandom);
-        Console.WriteLine("");
-
-        Console.WriteLine("Learnt vs Basic");
-        game.runGameSimulations(50, aiLearnt, aiMctsSimpleAgent);
-        game.runGameSimulations(50, aiMctsSimpleAgent, aiLearnt);
-        Console.WriteLine("");
-
-        Console.WriteLine("Hard Pruning vs Basic");
-        game.runGameSimulations(50, aiPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(50, aiMctsSimpleAgent, aiPruning);
-        Console.WriteLine("");
-
-        Console.WriteLine("Soft Pruning 0.25 vs Basic");
-        game.runGameSimulations(50, aiSoftPruning, aiMctsSimpleAgent);
-        game.runGameSimulations(50, aiMctsSimpleAgent, aiSoftPruning);
-        Console.WriteLine("");
+//        Console.WriteLine("Hard Pruning vs Basic");
+//        game.runGameSimulations(50, aiPruning, aiMctsSimpleAgent);
+//        game.runGameSimulations(50, aiMctsSimpleAgent, aiPruning);
+//        Console.WriteLine("");
+//
+//        Console.WriteLine("Soft Pruning 0.25 vs Basic");
+//        game.runGameSimulations(50, aiSoftPruning, aiMctsSimpleAgent);
+//        game.runGameSimulations(50, aiMctsSimpleAgent, aiSoftPruning);
+//        Console.WriteLine("");
     }
 
     public static void runHexDevTest()
@@ -156,18 +156,18 @@ public class Test
 
         Game game = new Hex();
 
-        Console.WriteLine("Random vs Model");
-        game.runGameSimulations(50, aiRandom, modelBased);
-        game.runGameSimulations(50, modelBased, aiRandom);
-        Console.WriteLine("");
-
-        Console.WriteLine("Random vs Basic");
-        game.runGameSimulations(50, aiRandom, aiMctsSimpleAgent);
-        game.runGameSimulations(50, aiMctsSimpleAgent, aiRandom);
-        Console.WriteLine("");
+//        Console.WriteLine("Random vs Model");
+//        game.runGameSimulations(50, aiRandom, modelBased);
+//        game.runGameSimulations(50, modelBased, aiRandom);
+//        Console.WriteLine("");
+//
+//        Console.WriteLine("Random vs Basic");
+//        game.runGameSimulations(50, aiRandom, aiMctsSimpleAgent);
+//        game.runGameSimulations(50, aiMctsSimpleAgent, aiRandom);
+//        Console.WriteLine("");
 
         Console.WriteLine("Learnt vs Basic");
-        game.runGameSimulations(50, aiLearnt, aiMctsSimpleAgent);
+ //       game.runGameSimulations(50, aiLearnt, aiMctsSimpleAgent);
         game.runGameSimulations(50, aiMctsSimpleAgent, aiLearnt);
         Console.WriteLine("");
 
