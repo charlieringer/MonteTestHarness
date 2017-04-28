@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Settings>
 	<MCTSSettings 
-		NumberOfSimulations="1000" 
+		NumberOfSimulations="500" 
 		ExploreWeight="1.45" 
 		MaxRollout="81" 
 		DrawScore="0.5">
@@ -13,9 +13,9 @@
 		SoftPruneWeight="0.75">	
 	</PruningSettings>
 
-	<RolloutSettins
+	<RolloutSettings
 		Epsilon="0.2">
-	</RolloutSettins>
+	</RolloutSettings>
 	
 	<DeepLearningSettings 
 		Alpha="0.01" 
