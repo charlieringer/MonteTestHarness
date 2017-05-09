@@ -1,0 +1,6 @@
+PWD /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/Settings
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/Settings/TicTacToeSettings.xml
+OUTPUT /Users/Charlie/Google Drive/_Year3/Final Year Project/Coding/MonteTestHarness/MonteTestHarness/MonteTestHarness/bin/Debug/Settings/TicTacToeSettings.log

@@ -4,13 +4,13 @@
 		NumberOfSimulations="100" 
 		ExploreWeight="1.45" 
 		MaxRollout="9" 
-		DrawScore="0.5">
+		DrawScore="0.75">
 	</MCTSSettings>
 
 	<PruningSettings 
 		PruneWorsePercent="0.15"
-		StopAt="7"
-		SoftPruneWeight="0.25">	
+		StopAt="5"
+		SoftPruneWeight="0.15">	
 	</PruningSettings>
 
 	<RolloutSettings
@@ -26,3 +26,4 @@
 		DrawScore="0.5">
 	</DeepLearningSettings>
 </Settings>
+
