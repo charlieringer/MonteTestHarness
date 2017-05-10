@@ -32,14 +32,14 @@ public class Test
         Console.WriteLine("Starting Testing");
         //Full Trials
         Console.WriteLine("Running Trials for TicTacToe.");
- //       runTrials(new TicTacToe(), new Model("ModelExamples/TicTacToe_Example.model"), "Settings/TicTacToeSettings.xml", 500);
-//        Console.WriteLine("");
+        runTrials(new TicTacToe(), new Model("ModelExamples/TicTacToe_Example.model"), "Settings/TicTacToeSettings.xml", 500);
+        Console.WriteLine("");
         Console.WriteLine("Running Trials for Order and Chaos.");
         runTrials(new OrderAndChaos(), new Model("ModelExamples/OrderChaos_Example.model"), "Settings/OrderAndChaosSettings.xml", 50);
-//        Console.WriteLine("");
-//        Console.WriteLine("Running Trials for Hex.");
-//        runTrials(new Hex(), new Model("ModelExamples/Hex_Example.model"), "Settings/HexSettings.xml", 50);
-//        Console.WriteLine("Done");
+        Console.WriteLine("");
+        Console.WriteLine("Running Trials for Hex.");
+        runTrials(new Hex(), new Model("ModelExamples/Hex_Example.model"), "Settings/HexSettings.xml", 50);
+        Console.WriteLine("Done");
     }
     public static void runTrials(Game game, Model model, string settings, int games)
     {
@@ -50,30 +50,30 @@ public class Test
         MCTSWithPruning pruned = new MCTSWithPruning(model, settings);
         MCTSWithSoftPruning softPruned = new MCTSWithSoftPruning(model, settings);
 
-//        Console.WriteLine("Random vs Model Based");
-//        game.runGameSimulations(games, random, modelBased);
-//        game.runGameSimulations(games, modelBased, random);
-//        Console.WriteLine("");
-//
-//        Console.WriteLine("Random vs Basic");
-//        game.runGameSimulations(games, random, simple);
-//        game.runGameSimulations(games, simple, random);
-//        Console.WriteLine("");
+        Console.WriteLine("Random vs Model Based");
+        game.runGameSimulations(games, random, modelBased);
+        game.runGameSimulations(games, modelBased, random);
+        Console.WriteLine("");
+
+        Console.WriteLine("Random vs Basic");
+        game.runGameSimulations(games, random, simple);
+        game.runGameSimulations(games, simple, random);
+        Console.WriteLine("");
 
         Console.WriteLine("Simple vs Learnt");
         game.runGameSimulations(games, simple, learnt);
         game.runGameSimulations(games, learnt, simple);
         Console.WriteLine("");
-//
-//        Console.WriteLine("Simple vs Pruned");
-//        game.runGameSimulations(games, simple, pruned);
-//        game.runGameSimulations(games, pruned, simple);
-//        Console.WriteLine("");
-//
-//        Console.WriteLine("Simple vs Soft Pruned");
-//        game.runGameSimulations(games, simple, softPruned);
-//        game.runGameSimulations(games, softPruned, simple);
-//        Console.WriteLine("");
+
+        Console.WriteLine("Simple vs Pruned");
+        game.runGameSimulations(games, simple, pruned);
+        game.runGameSimulations(games, pruned, simple);
+        Console.WriteLine("");
+
+        Console.WriteLine("Simple vs Soft Pruned");
+        game.runGameSimulations(games, simple, softPruned);
+        game.runGameSimulations(games, softPruned, simple);
+        Console.WriteLine("");
 
     }
 }
